@@ -1,0 +1,40 @@
+*{
+	box-sizing: border-box;
+	padding: 0;
+	margin: 0;
+}
+
+:root{
+
+	--background-primary: #020202;
+	--background-secondary: #111012;
+	--background-tertiary: #24222e;
+	--background-brand: #c58de7;
+	--background-gray: #3d3d3d;
+
+	--content-primary: #ffffff;
+	--content-secondary: #c7c9cc;
+	--content-tertiary: #d9d9d9;
+	--content-brand: #c58de7;
+	--coler-inverse: #030203;
+
+	--accent-pink: #d586e0;
+	--accent-blue: #5a8ee0;
+	--accent-green: #77c0af;
+	--accent-lime: #d1dc97;
+	--accent-red: #e9a9b3;
+
+	--gradient-border: 91.26deg, #77C0AF 0%, #D1DC97 14.84%, #E9A9B3 32.15%, #D586E0 65.79%, #91A1FA 84.58%;
+	--gradient-background: #D586E0 0%, #91A1FA 98.93%;
+	--gradient-content: #C7C9CC 0%, #3D3D3D 100%;
+
+	--ff-sora: 'Sora', sans-serif;
+	--ff-mono: "Roboto Mono", monospace;
+	--ff-flex: "Roboto Flex", sans-serif;
+
+	--display-large: 800 ;
+}
+
+body{
+	font-family: var(--ff-sora);
+}
