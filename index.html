@@ -6,7 +6,7 @@
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Sorteador de Números</title>
-		
+
         <link
             href="https://fonts.googleapis.com/css2?family=Roboto+Flex:opsz,wght@8..144,100..1000&family=Roboto+Mono:ital,wght@0,100..700;1,100..700&family=Sora:wght@100..800&display=swap"
             rel="stylesheet"
@@ -14,6 +14,109 @@
         <link rel="stylesheet" href="styles/index.css" />
     </head>
     <body>
+        <div class="content">
+            <img
+                src="assets/images/logo.png"
+                alt="Logo do Sorteador de Números"
+                class="logo"
+            />
+            <div>
+                <main>
+                    <header>
+                        <span>Online - Gratuito</span>
+                        <h1>Sorteador de Números</h1>
+                    </header>
+                    <section class="description">
+                        <div class="content-description">
+                            <img
+                                src="assets/icons/chat.svg"
+                                alt="Icone de informação"
+                            />
+                            <div class="text-description">
+                                <h2>Como funciona o sorteador de números?</h2>
+                                <p>
+                                    O sorteador utiliza um algoritmo de geração
+                                    aleatória para criar números dentro do
+                                    intervalo especificado pelo usuário.
+                                </p>
+                            </div>
+                        </div>
+                        <div class="content-description">
+                            <img
+                                src="assets/icons/chat.svg"
+                                alt="Icone de informação"
+                            />
+                            <div class="text-description">
+                                <h2>Posso escolher o intervalo dos números?</h2>
+                                <p>
+                                    Sim, você pode definir os valores mínimo e
+                                    máximo para o intervalo dos números
+                                    sorteados.
+                                </p>
+                            </div>
+                        </div>
+                    </section>
+                </main>
+                <aside>
+                    <form>
+                        <div class="title">
+                            <h2>Quero sortear:</h2>
+                            <p>
+                                defina o intervalo e a quantidade de números,
+                                clique em "Sortear" e veja os resultados na
+                                tela. É rápido e fácil!
+                            </p>
+                        </div>
+                        <fieldset class="inputs">
+                            <div class="number-inputs">
+                                <div class="input-group">
+                                    <label for="quantity">Números</label>
+                                    <input
+                                        type="number"
+                                        id="quantity"
+                                        name="quantity"
+                                        placeholder="0"
+                                    />
+                                </div>
+                                <div class="input-group">
+                                    <label for="min">de</label>
+                                    <input
+                                        type="number"
+                                        id="min"
+                                        name="min"
+                                        placeholder="0"
+                                    />
+                                </div>
+                                <div class="input-group">
+                                    <label for="max">até</label>
+                                    <input
+                                        type="number"
+                                        id="max"
+                                        name="max"
+                                        placeholder="0"
+                                    />
+                                </div>
+                            </div>
+                            <div class="checkbox-inputs">
+                                <span>Não repetir números</span>
+                                <input
+                                    type="checkbox"
+                                    id="toggle"
+                                />
+                                <label for="toggle"></label>
+                            </div>
+                        </fieldset>
+                        <button>
+                            Sortear
+                            <img
+                                src="assets/icons/arrow-right.svg"
+                                alt="Icone de flecha para a direita"
+                            />
+                        </button>
+                    </form>
+                </aside>
+            </div>
+        </div>
         <script src="script.js"></script>
     </body>
 </html>
