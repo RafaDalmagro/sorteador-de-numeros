@@ -36,18 +36,81 @@
     --display-md: 800 2.5rem/130% var(--ff-sora);
     --display-sm: 700 2rem/130% var(--ff-sora);
 
-	--overline: 700 1rem/150% var(--ff-mono);
+    --overline: 700 1rem/150% var(--ff-mono);
 
-	--paragraph-lg: 400 1rem/150% var(--ff-flex);
-	--paragraph-md: 400 .875rem/150% var(--ff-flex);
-	--paragraph-sm: 400 .75rem/150% var(--ff-flex);
-	--label-md: 700 1.25rem/150% var(--ff-flex);
-	--label-sm: 700 1rem/150% var(--ff-flex);
+    --paragraph-lg: 400 1rem/150% var(--ff-flex);
+    --paragraph-md: 400 0.875rem/150% var(--ff-flex);
+    --paragraph-sm: 400 0.75rem/150% var(--ff-flex);
+    --label-md: 700 1.25rem/150% var(--ff-flex);
+    --label-sm: 700 1rem/150% var(--ff-flex);
 }
 
 body {
     font-family: var(--ff-sora);
-	background-color: var(--background-primary);
+    background-color: var(--background-primary);
+    display: flex;
+    justify-content: center;
+    color: var(--content-primary);
+}
+h1,
+h2,
+h3 {
+    color: var(--content-primary);
 }
 
+button {
+    cursor: pointer;
+    background: var(--background-tertiary);
+    text-transform: uppercase;
+    border-radius: .5rem;
+    color: var(--content-primary);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    justify-content: center;
+    padding-block: 1rem;
+    border: none;
+    font: var(--label-sm);
+}
+.content {
+    display: flex;
+    flex-direction: column;
+    width: 24.375rem;
+    padding: 2.75rem 2.25rem;
 
+    .logo {
+        margin-bottom: 2.875rem;
+        width: 10.75rem;
+        height: auto;
+        object-fit: contain;
+        align-self: center;
+    }
+
+    & > div {
+        display: grid;
+        grid-template-rows: auto auto auto;
+        grid-template-areas:
+            "header"
+            "aside"
+            "description";
+    }
+}
+
+header {
+    grid-area: header;
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    gap: 0.5rem;
+    height: 8.5rem;
+    margin-bottom: 2.625rem;
+
+    text-transform: uppercase;
+
+    & span {
+        font: var(--overline);
+    }
+    & h1 {
+        font: var(--display-md);
+    }
+}

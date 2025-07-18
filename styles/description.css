@@ -1,0 +1,23 @@
+section.description {
+    grid-area: description;
+    margin-top: 5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 2.25rem;
+    .content-description {
+        display: flex;
+        gap: .5rem;
+        img{
+            align-self: flex-start;
+        }
+        h2 {
+            font: var(--paragraph-md);
+            color: var(--content-brand);
+        }
+
+        p {
+            font: var(--paragraph-sm);
+            color: var(--content-secondary);
+        }
+    }
+}
