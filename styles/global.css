@@ -151,15 +151,53 @@ select {
     }
 }
 
-.hide{
+.hide {
     display: none;
 }
-.color-brand{
+.color-brand {
     color: var(--content-brand);
 }
-.color-invert{
+.color-invert {
     color: var(--color-inverse);
 }
-.animation-appear{
+.animation-appear {
     animation: appearAndRotate 2s ease-in-out forwards;
+}
+.change-color {
+    animation: colorChange 100ms linear 1.8s forwards;
+}   
+@keyframes appearAndRotate {
+    0% {
+        opacity: 0;
+        transform: scale(0) rotate(0deg);
+    }
+    50% {
+        opacity: 1;
+        transform: scale(0.75) rotate(180deg);
+    }
+    75% {
+        transform: scale(1.1) rotate(270deg);
+    }
+    100% {
+        opacity: 0;
+        transform: scale(1) rotate(360deg);
+    }
+}
+
+@keyframes rotateButton {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes colorChange {
+    from {
+        color: var(--color-invert);
+    }
+    to {
+        color: var(--content-brand);
+    }
 }

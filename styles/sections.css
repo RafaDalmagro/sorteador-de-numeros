@@ -202,6 +202,8 @@ section.result:not(.hide) {
         display: flex;
         gap: 1rem;
         color: var(--color-invert);
+        flex-wrap: wrap;
+        justify-content: center;
 
         .result-wrapper {
             position: relative;
@@ -221,14 +223,14 @@ section.result:not(.hide) {
                 height: 100%;
                 z-index: -1;
             }
-        }
-        & #result-1,
-        & #result-2 {
-            font: 700 3rem/150% var(--ff-mono);
-            z-index: 1;
+
+            & .result-number {
+                font: 700 3rem/150% var(--ff-mono);
+                z-index: 1;
+            }
         }
     }
-    
+
     & .button-field {
         button {
             position: relative;
@@ -257,31 +259,5 @@ section.result:not(.hide) {
                 animation: rotateButton 2s ease-in-out infinite;
             }
         }
-    }
-}
-@keyframes appearAndRotate {
-    0% {
-        opacity: 0;
-        transform: scale(0) rotate(0deg);
-    }
-    50% {
-        opacity: 1;
-        transform: scale(0.75) rotate(180deg);
-    }
-    75% {
-        transform: scale(1.1) rotate(270deg);
-    }
-    100% {
-        opacity: 0;
-        transform: scale(1) rotate(360deg);
-    }
-}
-
-@keyframes rotateButton {
-    0% {
-        transform: rotate(0deg);
-    }
-    100% {
-        transform: rotate(360deg);
     }
 }
