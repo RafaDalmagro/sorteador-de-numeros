@@ -52,31 +52,66 @@ body {
     justify-content: center;
     color: var(--content-primary);
 }
+
 h1,
 h2,
 h3 {
     color: var(--content-primary);
 }
 
-button {
-    cursor: pointer;
-    background: var(--background-tertiary);
-    text-transform: uppercase;
-    border-radius: .5rem;
-    color: var(--content-primary);
+input:not([type="checkbox"]),
+button,
+textarea,
+select {
+    all: unset;
+    box-sizing: border-box;
+}
+
+.border-animation {
     display: flex;
     align-items: center;
-    gap: 0.5rem;
     justify-content: center;
-    padding-block: 1rem;
-    border: none;
-    font: var(--label-sm);
+
+    width: 100%;
+    border-radius: 0.5rem;
+    position: relative;
+
+    &::before {
+        overflow: hidden;
+        content: "";
+        position: absolute;
+        width: calc(100% + 3px);
+        height: calc(100% + 3px);
+        border-radius: 0.5rem;
+        background: linear-gradient(var(--gradient-border));
+        z-index: -1;
+        background-size: 300%;
+        filter: blur(2px);
+        opacity: 0;
+        transition: opacity 0.3s ease;
+    }
+    &:hover::before,
+    &:focus-within::before {
+        animation: rotateBorder 2s linear alternate infinite;
+        opacity: 1;
+    }
+}
+
+@keyframes rotateBorder {
+    0% {
+        background-position: 0%;
+        opacity: 0.5;
+    }
+    100% {
+        background-position: 300%;
+        opacity: 1;
+    }
 }
 .content {
     display: flex;
     flex-direction: column;
     width: 24.375rem;
-    padding: 2.75rem 2.25rem;
+    padding: 2.75rem 2.1875rem;
 
     .logo {
         margin-bottom: 2.875rem;
@@ -86,31 +121,45 @@ button {
         align-self: center;
     }
 
+    & > div > header {
+        grid-area: header;
+        display: flex;
+        flex-direction: column;
+        align-items: start;
+        gap: 0.5rem;
+        height: 8.5rem;
+        margin-bottom: 2.625rem;
+
+        text-transform: uppercase;
+
+        & span {
+            font: var(--overline);
+        }
+        & h1 {
+            font: var(--display-md);
+        }
+    }
+
     & > div {
         display: grid;
         grid-template-rows: auto auto auto;
+        width: 100%;
         grid-template-areas:
             "header"
-            "aside"
+            "interaction"
             "description";
     }
 }
 
-header {
-    grid-area: header;
-    display: flex;
-    flex-direction: column;
-    align-items: start;
-    gap: 0.5rem;
-    height: 8.5rem;
-    margin-bottom: 2.625rem;
-
-    text-transform: uppercase;
-
-    & span {
-        font: var(--overline);
-    }
-    & h1 {
-        font: var(--display-md);
-    }
+.hide{
+    display: none;
+}
+.color-brand{
+    color: var(--content-brand);
+}
+.color-invert{
+    color: var(--color-inverse);
+}
+.animation-appear{
+    animation: appearAndRotate 2s ease-in-out forwards;
 }
