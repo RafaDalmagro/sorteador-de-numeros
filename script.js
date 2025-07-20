@@ -4,6 +4,8 @@ const minValue = document.querySelector("#min");
 const maxValue = document.querySelector("#max");
 const repeat = document.querySelector("#toggle");
 const inputFields = document.getElementById("interaction");
+const buttonResult = document.querySelector("#button-result");
+let lastRandomData = null;
 
 qtdNumber.oninput = () => {
     qtdNumber.value = qtdNumber.value.replace(/\D/g, "");
@@ -30,6 +32,8 @@ form.onsubmit = (event) => {
         return;
     }
 
+    lastRandomData = random;
+
     const numbers = randomCalc(
         random.min,
         random.max,
@@ -37,9 +41,8 @@ form.onsubmit = (event) => {
         random.isRepeat
     );
 
-    console.log("Números sorteados:", numbers);
+    // console.log("Números sorteados:", numbers);
     hideInputs();
-
     showResults(numbers);
     clearForm();
 };
@@ -47,6 +50,19 @@ form.onsubmit = (event) => {
 // function formatNumber(number) {
 //     const formattedNumber = number.toString().padStart(2, "0");
 // }
+
+buttonResult.addEventListener("click", () => {
+    if (!lastRandomData) {
+        alert("Nenhum sorteio anterior encontrado.");
+        return;
+    }
+
+    const { min, max, qtd, isRepeat } = lastRandomData;
+
+    const numbers = randomCalc(min, max, qtd, isRepeat);
+    console.log("Re-sorteando com os mesmos valores:", numbers);
+    showResults(numbers);
+});
 
 function randomCalc(min, max, qtd, isRepeat) {
     const minValue = parseInt(min);
@@ -83,15 +99,20 @@ function showResults(numbers) {
         const resultContainer = document.querySelector("#result");
         const resultContent = document.querySelector(".result-content");
         const buttonResult = document.querySelector("#button-result");
-        console.log("selecionando botão de resultado:", buttonResult);
-        
+        const headerResult = resultContent.querySelector("#result-header");
+
         buttonResult.classList.remove("hide");
-        console.log("selecionando botão de resultado:", buttonResult);
         resultContainer.classList.remove("hide");
+
+        let node = headerResult.nextElementSibling;
+        while (node && node !== buttonResult) {
+            const toRemove = node;
+            node = node.nextElementSibling;
+            resultContent.removeChild(toRemove);
+        }
 
         for (let i = 0; i < numbers.length; i++) {
             const number = numbers[i];
-            console.log(`Exibindo número: ${number}`);
 
             const inputContainer = document.createElement("div");
             inputContainer.className = "result-container";
@@ -108,18 +129,11 @@ function showResults(numbers) {
             spanElement.className = "color-invert result-number change-color";
             spanElement.textContent = number;
 
-            // const resultNumber = document.querySelector(`#result-${i + 1}`);
-            // resultNumber.className = "color-invert result-number";
             inputElement.appendChild(spanElement);
             inputElement.appendChild(bgElement);
             inputContainer.appendChild(inputElement);
-            resultContent.appendChild(inputContainer);
+            resultContent.insertBefore(inputContainer, buttonResult);
         }
-
-        
-
-
-
     } catch (error) {
         console.error("Erro ao exibir resultados:", error);
         alert(
