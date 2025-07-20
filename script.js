@@ -19,9 +19,9 @@ form.onsubmit = (event) => {
     event.preventDefault();
 
     const random = {
-        qtd: parseInt(qtdNumber.value) || 0,
-        min: parseInt(minValue.value) || 0,
-        max: parseInt(maxValue.value) || 0,
+        qtd: parseInt(qtdNumber.value) || 1,
+        min: parseInt(minValue.value) || 1,
+        max: parseInt(maxValue.value) || 10,
         isRepeat: repeat.checked,
     };
 
@@ -81,9 +81,13 @@ function hideInputs() {
 function showResults(numbers) {
     try {
         const resultContainer = document.querySelector("#result");
+        const resultContent = document.querySelector(".result-content");
+        const buttonResult = document.querySelector("#button-result");
+        console.log("selecionando botão de resultado:", buttonResult);
+        
+        buttonResult.classList.remove("hide");
+        console.log("selecionando botão de resultado:", buttonResult);
         resultContainer.classList.remove("hide");
-        resultContainer.innerHTML = "";
-        console.log("Exibindo resultados...");
 
         for (let i = 0; i < numbers.length; i++) {
             const number = numbers[i];
@@ -109,8 +113,13 @@ function showResults(numbers) {
             inputElement.appendChild(spanElement);
             inputElement.appendChild(bgElement);
             inputContainer.appendChild(inputElement);
-            resultContainer.appendChild(inputContainer);
+            resultContent.appendChild(inputContainer);
         }
+
+        
+
+
+
     } catch (error) {
         console.error("Erro ao exibir resultados:", error);
         alert(

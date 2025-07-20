@@ -74,7 +74,7 @@
                                             type="number"
                                             id="quantity"
                                             name="quantity"
-                                            placeholder="0"
+                                            placeholder="1"
                                         />
                                     </div>
                                 </div>
@@ -86,7 +86,7 @@
                                             type="number"
                                             id="min"
                                             name="min"
-                                            placeholder="0"
+                                            placeholder="1"
                                         />
                                     </div>
                                 </div>
@@ -97,7 +97,7 @@
                                             type="number"
                                             id="max"
                                             name="max"
-                                            placeholder="0"
+                                            placeholder="10"
                                         />
                                     </div>
                                 </div>
@@ -126,25 +126,31 @@
                     </form>
                 </section>
                 <section class="result hide" id="result">
-                    <header>
-                        <h2>Resultado do sorteio</h2>
-                        <span>1º resultado</span>
-                    </header>
-                    <div id="result-container" class="result-container">
-                        <!-- <div class="result-wrapper">
-                            <div class="result-bg" id="result-bg-1">
+                    <div class="result-content">
+                        <header>
+                            <h2>Resultado do sorteio</h2>
+                            <span>1º resultado</span>
+                        </header>
+                        <!-- <div id="result-container" class="result-container">
+                            <div class="result-wrapper">
+                                <div class="result-bg" id="result-bg-1"></div>
+                                <span id="result-1" class="color-brand"
+                                    >23</span
+                                >
                             </div>
-                            <span id="result-1" class="color-brand">23</span>
                         </div> -->
-                    </div>
-                    <div class="button-field border-animation hide">
-                        <button>
-                            Sortear novamente
-                            <img
-                                src="assets/icons/play.svg"
-                                alt="Icone de flecha em circulo"
-                            />
-                        </button>
+                        <div
+                            class="button-field border-animation hide"
+                            id="button-result"
+                        >
+                            <button>
+                                Sortear novamente
+                                <img
+                                    src="assets/icons/play.svg"
+                                    alt="Icone de flecha em circulo"
+                                />
+                            </button>
+                        </div>
                     </div>
                 </section>
             </div>
