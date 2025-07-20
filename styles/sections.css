@@ -199,12 +199,11 @@ section#result {
                 color: var(--content-secondary);
             }
         }
-        & .result-container {
-            display: flex;
+
+        & #div-numbers {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
             gap: 1rem;
-            color: var(--color-invert);
-            flex-wrap: wrap;
-            justify-content: center;
 
             .result-wrapper {
                 position: relative;

@@ -5,6 +5,8 @@ const maxValue = document.querySelector("#max");
 const repeat = document.querySelector("#toggle");
 const inputFields = document.getElementById("interaction");
 const buttonResult = document.querySelector("#button-result");
+const qtdResult = document.querySelector("#qtdResult");
+let qtdResultClick = 1;
 let lastRandomData = null;
 
 qtdNumber.oninput = () => {
@@ -47,10 +49,6 @@ form.onsubmit = (event) => {
     clearForm();
 };
 
-// function formatNumber(number) {
-//     const formattedNumber = number.toString().padStart(2, "0");
-// }
-
 buttonResult.addEventListener("click", () => {
     if (!lastRandomData) {
         alert("Nenhum sorteio anterior encontrado.");
@@ -58,10 +56,10 @@ buttonResult.addEventListener("click", () => {
     }
 
     const { min, max, qtd, isRepeat } = lastRandomData;
-
+    qtdResultClick++;
     const numbers = randomCalc(min, max, qtd, isRepeat);
-    console.log("Re-sorteando com os mesmos valores:", numbers);
     showResults(numbers);
+    qtdResult.textContent = `${qtdResultClick}º resultado`;
 });
 
 function randomCalc(min, max, qtd, isRepeat) {
@@ -97,25 +95,19 @@ function hideInputs() {
 function showResults(numbers) {
     try {
         const resultContainer = document.querySelector("#result");
-        const resultContent = document.querySelector(".result-content");
+        const resultNumbers = document.getElementById("div-numbers"); // Alterado para "div-numbers"
         const buttonResult = document.querySelector("#button-result");
-        const headerResult = resultContent.querySelector("#result-header");
 
-        buttonResult.classList.remove("hide");
+        // Limpa os resultados anteriores
+        resultNumbers.innerHTML = ""; 
+
+        // Exibe os elementos necessários
         resultContainer.classList.remove("hide");
-
-        let node = headerResult.nextElementSibling;
-        while (node && node !== buttonResult) {
-            const toRemove = node;
-            node = node.nextElementSibling;
-            resultContent.removeChild(toRemove);
-        }
+        resultNumbers.classList.remove("hide");
+        buttonResult.classList.remove("hide");
 
         for (let i = 0; i < numbers.length; i++) {
             const number = numbers[i];
-
-            const inputContainer = document.createElement("div");
-            inputContainer.className = "result-container";
 
             const inputElement = document.createElement("div");
             inputElement.className = "result-wrapper";
@@ -131,15 +123,13 @@ function showResults(numbers) {
 
             inputElement.appendChild(spanElement);
             inputElement.appendChild(bgElement);
-            inputContainer.appendChild(inputElement);
-            resultContent.insertBefore(inputContainer, buttonResult);
+            resultNumbers.appendChild(inputElement);
         }
     } catch (error) {
         console.error("Erro ao exibir resultados:", error);
         alert(
             "Ocorreu um erro ao exibir os resultados. Por favor, tente novamente."
         );
-        return;
     }
 }
 
