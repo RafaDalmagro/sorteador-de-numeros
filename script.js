@@ -6,6 +6,7 @@ const repeat = document.querySelector("#toggle");
 const inputFields = document.getElementById("interaction");
 const buttonResult = document.querySelector("#button-result");
 const qtdResult = document.querySelector("#qtdResult");
+const buttonReturn = document.querySelector("#button-return");
 let qtdResultClick = 1;
 let lastRandomData = null;
 
@@ -22,31 +23,40 @@ maxValue.oninput = () => {
 form.onsubmit = (event) => {
     event.preventDefault();
 
-    const random = {
-        qtd: parseInt(qtdNumber.value) || 1,
-        min: parseInt(minValue.value) || 1,
-        max: parseInt(maxValue.value) || 10,
-        isRepeat: repeat.checked,
-    };
+    try {
+        const random = {
+            qtd: parseInt(qtdNumber.value) || 1,
+            min: parseInt(minValue.value) || 1,
+            max: parseInt(maxValue.value) || 10,
+            isRepeat: repeat.checked,
+        };
 
-    if (isNaN(random.qtd) || isNaN(random.min) || isNaN(random.max)) {
-        alert("Por favor, preencha todos os campos corretamente.");
-        return;
+        if (isNaN(random.qtd) || isNaN(random.min) || isNaN(random.max)) {
+            alert("Por favor, preencha todos os campos corretamente.");
+            return;
+        }
+
+        const numbers = randomCalc(
+            random.min,
+            random.max,
+            random.qtd,
+            random.isRepeat
+        );
+
+        if (numbers.length === 0) {
+            clearForm();
+            return;
+        }
+
+        lastRandomData = random;
+
+        hideInputs();
+        showResults(numbers);
+        clearForm();
+    } catch (error) {
+        console.error("Erro no envio do formulário:", error);
+        clearForm();
     }
-
-    lastRandomData = random;
-
-    const numbers = randomCalc(
-        random.min,
-        random.max,
-        random.qtd,
-        random.isRepeat
-    );
-
-    // console.log("Números sorteados:", numbers);
-    hideInputs();
-    showResults(numbers);
-    clearForm();
 };
 
 buttonResult.addEventListener("click", () => {
@@ -62,30 +72,47 @@ buttonResult.addEventListener("click", () => {
     qtdResult.textContent = `${qtdResultClick}º resultado`;
 });
 
-function randomCalc(min, max, qtd, isRepeat) {
-    const minValue = parseInt(min);
-    const maxValue = parseInt(max);
-    const qtdValue = parseInt(qtd);
-    const numbers = [];
+buttonReturn.addEventListener("click", () => {
+    location.reload();
+});
 
-    if (isRepeat) {
-        for (let i = 0; i < qtd; i++) {
-            const randomNumber =
-                Math.floor(Math.random() * (maxValue - minValue + 1)) +
-                minValue;
-            numbers.push(randomNumber);
+function randomCalc(min, max, qtd, isRepeat) {
+    try {
+        const minValue = parseInt(min);
+        const maxValue = parseInt(max);
+        const qtdValue = parseInt(qtd);
+        const numbers = [];
+
+        const intervaloTotal = maxValue - minValue + 1;
+
+        if (!isRepeat && qtdValue > intervaloTotal) {
+            alert(
+                `Não é possível sortear ${qtdValue} números únicos dentro do intervalo de ${minValue} a ${maxValue}. Por favor, ajuste os valores e tente novamente.`
+            );
+            return [];
         }
-    } else {
-        while (numbers.length < qtdValue) {
-            const randomNumber =
-                Math.floor(Math.random() * (maxValue - minValue + 1)) +
-                minValue;
-            if (!numbers.includes(randomNumber)) {
+
+        if (isRepeat) {
+            for (let i = 0; i < qtdValue; i++) {
+                const randomNumber =
+                    Math.floor(Math.random() * intervaloTotal) + minValue;
                 numbers.push(randomNumber);
             }
+        } else {
+            while (numbers.length < qtdValue) {
+                const randomNumber =
+                    Math.floor(Math.random() * intervaloTotal) + minValue;
+                if (!numbers.includes(randomNumber)) {
+                    numbers.push(randomNumber);
+                }
+            }
         }
+
+        return numbers;
+    } catch (error) {
+        console.error("Erro ao calcular números aleatórios:", error);
+        return [];
     }
-    return numbers;
 }
 
 function hideInputs() {
@@ -99,12 +126,13 @@ function showResults(numbers) {
         const buttonResult = document.querySelector("#button-result");
 
         // Limpa os resultados anteriores
-        resultNumbers.innerHTML = ""; 
+        resultNumbers.innerHTML = "";
 
         // Exibe os elementos necessários
         resultContainer.classList.remove("hide");
         resultNumbers.classList.remove("hide");
         buttonResult.classList.remove("hide");
+        buttonReturn.classList.remove("hide");
 
         for (let i = 0; i < numbers.length; i++) {
             const number = numbers[i];
